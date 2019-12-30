@@ -34,6 +34,14 @@ public class QRCodeScannerActivity extends AppCompatActivity {
     final int RequestCameraPermissionID = 1001;
     private static final int CAMERA_REQUEST = 1888;
 
+    /**
+     *
+     * Metodo che permette di verificare i permessi della fotocamera
+     *
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
@@ -148,6 +156,12 @@ public class QRCodeScannerActivity extends AppCompatActivity {
 
     }
 
+    /**
+     *
+     * Metodo che permette di tornare alla schermata iniziale
+     *
+     * @param view
+     */
 
     public void getBack(View view){
 

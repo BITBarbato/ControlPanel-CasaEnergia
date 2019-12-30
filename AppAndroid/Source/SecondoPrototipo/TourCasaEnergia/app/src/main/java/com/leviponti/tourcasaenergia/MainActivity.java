@@ -196,6 +196,14 @@ public class MainActivity extends AppCompatActivity{
         });
     }
 
+    /**
+     *
+     * Metodo che permette di aggiornare la url del sito della webview in seguito alla scansione del codice QR
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -209,6 +217,11 @@ public class MainActivity extends AppCompatActivity{
     }
 
 
+    /**
+     *
+     * Metodo che permette di nascondere la UI di sistema
+     *
+     */
     private void hideSystemUI() {
 
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
