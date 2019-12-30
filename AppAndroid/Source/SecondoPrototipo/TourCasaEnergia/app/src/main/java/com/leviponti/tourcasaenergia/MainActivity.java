@@ -46,11 +46,18 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         hideSystemUI();
+
+        /**
+         * Settaggio impostazioni della web view
+         **/
         this.webView=(WebView)findViewById(R.id.web);
         this.webView.getSettings().setJavaScriptEnabled(true);
         this.webView.setWebViewClient(new WebViewClient());
 
 
+        /*
+            Verifica dei permessi dell'applicazione a internet e per la localizzazione
+         */
         Dexter.withActivity(this)
                 .withPermissions(Manifest.permission.INTERNET,Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION)
                 .withListener(new MultiplePermissionsListener() {
@@ -70,7 +77,7 @@ public class MainActivity extends AppCompatActivity{
 
 
         /**
-         * Check whether the Bluetooth is on
+         * Si verifica se il bluetooth è acceso, altrimenti viene richiesto di accenderlo
          **/
         if (!sensoroManager.isBluetoothEnabled()) {
             Intent bluetoothIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
@@ -78,15 +85,13 @@ public class MainActivity extends AppCompatActivity{
         }
 
         /**
-         * Enable cloud service (upload sensor data, including battery status, UMM, etc.)。Without setup, it keeps in closed status as default.
+         * Viene abilitato il servizio cloud dei beacon
          **/
         sensoroManager.setCloudServiceEnable(false);
 
         /**
-         * Enable SDK service
+         * Viene abilitato l'SDK dei beacon Sensoro
          **/
-
-
         beaconManagerListener=new BeaconManagerListener() {
             @Override
             public void onNewBeacon(Beacon beacon) {
@@ -112,6 +117,9 @@ public class MainActivity extends AppCompatActivity{
 
         sensoroManager.setBeaconManagerListener(beaconManagerListener);
         try {
+            /**
+             * Viene inizializzato il servizio di scansione dei beacon
+             */
             sensoroManager.startService();
 
         } catch (Exception e) {
@@ -120,6 +128,12 @@ public class MainActivity extends AppCompatActivity{
 
     }
 
+    /**
+     *
+     * Metodo che permette di visualizzare sulla webview il sito precedente a quello corrente
+     *
+     * @param view
+     */
     public void getPrevSite(View view){
 
         if(this.webView.canGoBack()){
@@ -128,22 +142,46 @@ public class MainActivity extends AppCompatActivity{
 
     }
 
+    /**
+     *
+     * Metodo che permette di visualizzare sulla webview il sito successivo a quello corrente
+     *
+     * @param view
+     */
     public void getForwardSite(View view){
         if(this.webView.canGoForward()){
             this.webView.loadUrl((webView.copyBackForwardList().getItemAtIndex(webView.copyBackForwardList().getCurrentIndex()+1)).getUrl());
         }
     }
 
+    /**
+     *
+     * Metodo che permette di entrare nell'Activity dove verrà effettuata la scansione del codice QR
+     *
+     * @param view
+     */
     public void getQrScanner(View view){
         Intent intent=new Intent(this,QRCodeScannerActivity.class);
 
         startActivityForResult(intent,CAMERA_REQUEST);
     }
 
+    /**
+     *
+     * Metodo di utilità per visualizzare  i Toast sull'applicazione
+     *
+     * @param s Stringa da visualizzare sul Toast
+     */
     private void showToast(String s){
         Toast.makeText(getApplicationContext(),s,Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     *
+     * Metodo utilizzato per settare nella webview la url del sito ottenuto dalla scansione dei beacon
+     *
+     * @param b Beacon scansionato
+     */
     private void uploadUrl(final Beacon b){
         runOnUiThread(new Runnable() {
             @Override
@@ -171,22 +209,14 @@ public class MainActivity extends AppCompatActivity{
     }
 
 
-
     private void hideSystemUI() {
-        // Enables regular immersive mode.
-        // For "lean back" mode, remove SYSTEM_UI_FLAG_IMMERSIVE.
-        // Or for "sticky immersive," replace it with SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-        View decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                        // Set the content to appear under the system bars so that the
-                        // content doesn't resize when the system bars hide and show.
-                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        // Hide the nav bar and status bar
-                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_FULLSCREEN);
+
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_FULLSCREEN);
     }
 }
 

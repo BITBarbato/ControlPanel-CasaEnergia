@@ -151,6 +151,9 @@ public class QRCodeScannerActivity extends AppCompatActivity {
 
     public void getBack(View view){
 
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        setResult(RESULT_OK,intent);
+
         cameraSource.stop();
         finish();
     }
