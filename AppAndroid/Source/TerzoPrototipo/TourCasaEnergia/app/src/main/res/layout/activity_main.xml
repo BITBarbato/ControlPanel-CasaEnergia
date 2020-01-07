@@ -20,21 +20,6 @@
         android:background="@color/colorPrimary">
 
         <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="42dp"
-            android:layout_height="49dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="11dp"
-            android:layout_marginBottom="11dp"
-            android:contentDescription="ArrowLeft"
-            android:visibility="visible"
-            android:onClick="getPrevSite"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@mipmap/arrowleftbold" />
-
-        <ImageView
             android:id="@+id/imageView"
             android:layout_width="42dp"
             android:layout_height="49dp"
@@ -53,15 +38,16 @@
             android:id="@+id/imageView4"
             android:layout_width="42dp"
             android:layout_height="49dp"
-            android:layout_marginStart="84dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="11dp"
             android:layout_marginBottom="11dp"
             android:contentDescription="ArrowLeft"
+            android:onClick="startScan"
             android:visibility="visible"
-            android:onClick="getForwardSite"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@mipmap/arrowrightbold" />
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@mipmap/arrowloading" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

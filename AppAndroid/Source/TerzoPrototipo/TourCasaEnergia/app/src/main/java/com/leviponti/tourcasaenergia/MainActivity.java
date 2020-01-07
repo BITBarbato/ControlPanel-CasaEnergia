@@ -207,10 +207,27 @@ public class MainActivity extends AppCompatActivity{
                     if(b.getEddystoneURL()!=webView.getUrl()) {
                         webView.loadUrl(b.getEddystoneURL());
                         currentBeacon = b;
+                        sensoroManager.stopService();
                     }
                 }
             }
         });
+    }
+
+    /**
+     *
+     * Metodo utilizzato per iniziare la scansione dei beacon nella zona
+     *
+     * @param view
+     */
+    public void startScan(View view){
+
+        try {
+            sensoroManager.startService();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**
