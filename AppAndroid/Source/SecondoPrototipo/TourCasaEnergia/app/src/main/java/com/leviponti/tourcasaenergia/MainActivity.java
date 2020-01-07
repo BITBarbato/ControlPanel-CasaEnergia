@@ -30,6 +30,8 @@ import com.sensoro.cloud.SensoroManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.logging.Logger;
 
 public class MainActivity extends AppCompatActivity{
@@ -107,8 +109,23 @@ public class MainActivity extends AppCompatActivity{
 
             @Override
             public void onUpdateBeacon(ArrayList<Beacon> arrayList) {
-                for(Beacon b:arrayList){
-                    Log.e("UPDATE BEACON-> ","UUID:"+b.getProximityUUID()+" url:"+b.getEddystoneURL());
+                Collections.sort(arrayList, new Comparator<Beacon>() {
+                    @Override
+                    public int compare(Beacon o1, Beacon o2) {
+                        if(o1.getRssi()>o2.getRssi()){
+                            return -1;
+                        }else{
+                            return 1;
+                        }
+                    }
+                });
+                if(arrayList.size()!=0) {
+                    Log.e("UPDATE BEACON", "List:");
+                    for (Beacon b : arrayList) {
+                        Log.e("UPDATE BEACON", "url:" + b.getEddystoneURL() + " rssi:" + b.getRssi());
+                    }
+                    Beacon b = arrayList.get(0);
+                    Log.e("## UPDATE URL BEACON-> ", "UUID:" + b.getProximityUUID() + " url:" + b.getEddystoneURL() + " ##");
                     uploadUrl(b);
                 }
             }
