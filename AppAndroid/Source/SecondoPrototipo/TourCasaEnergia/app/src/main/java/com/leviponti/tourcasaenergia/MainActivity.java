@@ -147,32 +147,6 @@ public class MainActivity extends AppCompatActivity{
 
     /**
      *
-     * Metodo che permette di visualizzare sulla webview il sito precedente a quello corrente
-     *
-     * @param view
-     */
-    public void getPrevSite(View view){
-
-        if(this.webView.canGoBack()){
-            this.webView.loadUrl((webView.copyBackForwardList().getItemAtIndex(webView.copyBackForwardList().getCurrentIndex()-1)).getUrl());
-        }
-
-    }
-
-    /**
-     *
-     * Metodo che permette di visualizzare sulla webview il sito successivo a quello corrente
-     *
-     * @param view
-     */
-    public void getForwardSite(View view){
-        if(this.webView.canGoForward()){
-            this.webView.loadUrl((webView.copyBackForwardList().getItemAtIndex(webView.copyBackForwardList().getCurrentIndex()+1)).getUrl());
-        }
-    }
-
-    /**
-     *
      * Metodo che permette di entrare nell'Activity dove verrà effettuata la scansione del codice QR
      *
      * @param view
