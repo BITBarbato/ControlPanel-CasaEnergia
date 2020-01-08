@@ -20,21 +20,6 @@
         android:background="@color/colorPrimary">
 
         <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="42dp"
-            android:layout_height="49dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="11dp"
-            android:layout_marginBottom="11dp"
-            android:contentDescription="ArrowLeft"
-            android:onClick="getQrScanner"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@mipmap/arrowloading" />
-
-        <ImageView
             android:id="@+id/imageView"
             android:layout_width="42dp"
             android:layout_height="49dp"
@@ -47,7 +32,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@mipmap/addphoto" />
+            app:srcCompat="@mipmap/scan" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
