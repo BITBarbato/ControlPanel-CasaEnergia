@@ -74,15 +74,7 @@ public class QRCodeScannerActivity extends AppCompatActivity {
 
         setContentView(R.layout.qrcode_scanner);
 
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                // Set the content to appear under the system bars so that the
-                // content doesn't resize when the system bars hide and show.
-                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                // Hide the nav bar and status bar
-                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_FULLSCREEN);
+        hideSystemUI();
 
         cameraPreview = (SurfaceView) findViewById(R.id.cameraPreview);
         txtResult = (TextView) findViewById(R.id.txtResult);
@@ -213,5 +205,21 @@ public class QRCodeScannerActivity extends AppCompatActivity {
         AlertDialog alert = builder.create();
         alert.show();
         //hideSystemUI();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        hideSystemUI();
+    }
+
+    private void hideSystemUI() {
+
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_FULLSCREEN);
     }
 }

@@ -25,6 +25,7 @@
         android:roundIcon="@mipmap/ble"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:hardwareAccelerated="true"
         tools:ignore="GoogleAppIndexingWarning">
         <service android:name="com.sensoro.beacon.kit.BeaconService"/>
         <service android:name="com.sensoro.beacon.kit.IntentProcessorService"/>
@@ -39,7 +40,5 @@
         </activity>
 
     </application>
-
-
 
 </manifest>

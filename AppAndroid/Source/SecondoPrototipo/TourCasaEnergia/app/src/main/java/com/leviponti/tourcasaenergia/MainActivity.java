@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
@@ -63,7 +64,9 @@ public class MainActivity extends AppCompatActivity{
          **/
         this.webView=(WebView)findViewById(R.id.web);
         this.webView.getSettings().setJavaScriptEnabled(true);
+        this.webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         this.webView.setWebViewClient(new WebViewClient());
+        this.webView.setLayerType(View.LAYER_TYPE_HARDWARE,null);
 
 
         /*
@@ -86,6 +89,9 @@ public class MainActivity extends AppCompatActivity{
 
         SensoroManager sensoroManager = SensoroManager.getInstance(getApplicationContext());
 
+
+        sensoroManager.setBackgroundBetweenScanPeriod(6000);
+        sensoroManager.setForegroundBetweenScanPeriod(6000);
 
         /**
          * Si verifica se il bluetooth è acceso, altrimenti viene richiesto di accenderlo
@@ -186,8 +192,8 @@ public class MainActivity extends AppCompatActivity{
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if(!b.equals(currentBeacon) && b.getEddystoneURL()!=null) {
-                    if(b.getEddystoneURL()!=webView.getUrl()) {
+                if(b.getEddystoneURL()!=null) {
+                    if(!b.equals(currentBeacon)) {
                         webView.loadUrl(b.getEddystoneURL());
                         currentBeacon = b;
                     }
@@ -257,6 +263,12 @@ public class MainActivity extends AppCompatActivity{
         activityManager.moveTaskToFront(getTaskId(), 0);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        hideSystemUI();
+    }
 
     /**
      *
