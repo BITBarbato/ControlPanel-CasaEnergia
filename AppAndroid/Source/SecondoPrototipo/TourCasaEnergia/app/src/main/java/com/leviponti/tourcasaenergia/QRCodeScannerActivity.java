@@ -2,7 +2,10 @@ package com.leviponti.tourcasaenergia;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -11,6 +14,7 @@ import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -172,5 +176,42 @@ public class QRCodeScannerActivity extends AppCompatActivity {
         finish();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
 
+        ActivityManager activityManager = (ActivityManager) getApplicationContext()
+                .getSystemService(Context.ACTIVITY_SERVICE);
+
+        activityManager.moveTaskToFront(getTaskId(), 0);
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final EditText pass=new EditText(this);
+        pass.setVisibility(View.VISIBLE);
+
+        builder.setMessage("Insert password to exit from app")
+                .setView(pass)
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        if(pass.getText().toString().equals("0000")){
+                            QRCodeScannerActivity.this.finish();
+                        }else{
+                            dialog.cancel();
+                        }
+
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+        //hideSystemUI();
+    }
 }
