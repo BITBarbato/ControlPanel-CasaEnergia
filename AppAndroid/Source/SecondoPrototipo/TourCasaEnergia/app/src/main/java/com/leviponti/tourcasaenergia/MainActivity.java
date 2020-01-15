@@ -37,6 +37,7 @@ import com.sensoro.beacon.kit.Beacon;
 import com.sensoro.beacon.kit.BeaconManagerListener;
 import com.sensoro.cloud.SensoroManager;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity{
     private SensoroManager sensoroManager;
     private BeaconManagerListener beaconManagerListener;
     private Beacon currentBeacon;
+    private DBClass dbClass;
     private boolean exit;
     public String url;
     private static final int CAMERA_REQUEST = 1888;
@@ -58,6 +60,12 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         hideSystemUI();
+
+        /*try {
+            dbClass=new DBClass();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }*/
 
         /**
          * Settaggio impostazioni della web view
@@ -194,8 +202,10 @@ public class MainActivity extends AppCompatActivity{
             public void run() {
                 if(b.getEddystoneURL()!=null) {
                     if(!b.equals(currentBeacon)) {
-                        webView.loadUrl(b.getEddystoneURL());
-                        currentBeacon = b;
+                        
+                            webView.loadUrl(b.getEddystoneURL());
+                            currentBeacon = b;
+
                     }
                 }
             }
