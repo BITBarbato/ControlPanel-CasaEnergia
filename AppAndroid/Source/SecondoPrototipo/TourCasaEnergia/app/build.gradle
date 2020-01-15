@@ -31,7 +31,7 @@ dependencies {
     implementation files('libs\\sensoro-scanner-1.0.1.jar')
     implementation files('libs\\sensoro-sensor-kit.jar')
     implementation files('libs\\sensorocloud-4.1.2.jar')
-    implementation files('libs\\mysql-connector-java-8.0.19.jar')
+    implementation files('libs\\mysql-connector.jar')
     implementation 'com.karumi:dexter:6.0.1'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'cz.msebera.android:httpclient:4.3.+'

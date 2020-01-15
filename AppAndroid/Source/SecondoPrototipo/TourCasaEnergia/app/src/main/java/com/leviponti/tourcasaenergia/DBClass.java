@@ -17,19 +17,34 @@ public class DBClass {
         Class.forName("com.mysql.jdbc.Driver");
 
         this.connection= DriverManager.getConnection(
-
-                "jdbc:mysql://192.168.88.213:3306/casaenergia","root",""
+                "jdbc:mysql://192.168.178.6:3306/casaenergia","root",""
         );
-            this.statement=connection.createStatement();
-            ResultSet set=statement.executeQuery("SELECT value FROM settings WHERE id_setting=1");
-            this.serverHTTP=set.getString("value");
+
+        this.statement=connection.createStatement();
+        ResultSet set=statement.executeQuery("SELECT value FROM settings WHERE id_setting=1");
+        set.first();
+        this.serverHTTP=set.getString("value");
+        System.out.println(this.serverHTTP);
+
     }
 
     public String getBeaconURL(String id_beacon) throws SQLException {
 
-        ResultSet set=this.statement.executeQuery("SELECT url FROM beacon_map WHERE id_beacon="+id_beacon);
+        ResultSet set=this.statement.executeQuery("SELECT url FROM beacon_map WHERE id_beacon='"+id_beacon+"'");
+
+        set.first();
+
+        System.out.println(set.getString("url"));
 
         return this.serverHTTP+set.getString("url");
 
+    }
+
+    public void close(){
+        try {
+            this.connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -61,11 +61,7 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
         hideSystemUI();
 
-        try {
-            dbClass=new DBClass();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
 
         /**
          * Settaggio impostazioni della web view
@@ -149,13 +145,26 @@ public class MainActivity extends AppCompatActivity{
                     }
                     Beacon b = arrayList.get(0);
                     Log.e("## UPDATE URL BEACON-> ", "UUID:" + b.getProximityUUID() + " url:" + b.getEddystoneURL() + " ##");
-                    uploadUrl(b);
+
+                    try {
+                        dbClass=new DBClass();
+                        String s=dbClass.getBeaconURL(b.getEddystoneURL());
+                        dbClass.close();
+                        uploadUrl(s);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+
                 }
             }
         };
 
 
         sensoroManager.setBeaconManagerListener(beaconManagerListener);
+
+
+
         try {
             /**
              * Viene inizializzato il servizio di scansione dei beacon
@@ -196,23 +205,39 @@ public class MainActivity extends AppCompatActivity{
      *
      * @param b Beacon scansionato
      */
-    private void uploadUrl(final Beacon b){
+    /*private void uploadUrl(final Beacon b){
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 if(b.getEddystoneURL()!=null) {
                     if(!b.equals(currentBeacon)) {
 
-                        try {
-                            webView.loadUrl(dbClass.getBeaconURL( b.getEddystoneURL()));
-                            currentBeacon = b;
-                        } catch (SQLException e) {
-                            e.printStackTrace();
-                        }
+
+                        webView.loadUrl( b.getEddystoneURL());
+                        currentBeacon = b;
 
 
                     }
                 }
+            }
+        });
+    }*/
+
+    private void uploadUrl(final String s){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                    if(!s.equals(url)) {
+                        if(s!=null){
+                            webView.loadUrl(s);
+                            url=s;
+                        }else {
+                            Log.e("ERR", "URL NULL");
+                        }
+
+                    }
+
             }
         });
     }
