@@ -12,7 +12,9 @@ public class DBClass {
     private Statement statement;
     private String serverHTTP;
 
-    public DBClass() throws SQLException {
+    public DBClass() throws SQLException, ClassNotFoundException {
+
+        Class.forName("com.mysql.jdbc.Driver");
 
         this.connection= DriverManager.getConnection(
 

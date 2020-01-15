@@ -61,11 +61,11 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
         hideSystemUI();
 
-        /*try {
+        try {
             dbClass=new DBClass();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        }*/
+        }
 
         /**
          * Settaggio impostazioni della web view
@@ -202,9 +202,14 @@ public class MainActivity extends AppCompatActivity{
             public void run() {
                 if(b.getEddystoneURL()!=null) {
                     if(!b.equals(currentBeacon)) {
-                        
-                            webView.loadUrl(b.getEddystoneURL());
+
+                        try {
+                            webView.loadUrl(dbClass.getBeaconURL( b.getEddystoneURL()));
                             currentBeacon = b;
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+
 
                     }
                 }
