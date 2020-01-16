@@ -17,7 +17,7 @@ public class DBClass {
         Class.forName("com.mysql.jdbc.Driver");
 
         this.connection= DriverManager.getConnection(
-                "jdbc:mysql://192.168.178.6:3306/casaenergia","root",""
+                "jdbc:mysql://remotemysql.com:3306/Fn3FS6KEOn","Fn3FS6KEOn","vX4XLO6VR3"
         );
 
         this.statement=connection.createStatement();
