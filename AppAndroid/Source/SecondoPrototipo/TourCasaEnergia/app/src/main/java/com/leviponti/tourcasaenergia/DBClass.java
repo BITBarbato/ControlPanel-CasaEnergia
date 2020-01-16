@@ -17,10 +17,12 @@ public class DBClass {
         Class.forName("com.mysql.jdbc.Driver");
 
         this.connection= DriverManager.getConnection(
-                "jdbc:mysql://remotemysql.com:3306/Fn3FS6KEOn","Fn3FS6KEOn","vX4XLO6VR3"
+                "jdbc:mysql://remotemysql.com:3306/Fn3FS6KEOn?characterEncoding=utf8","Fn3FS6KEOn","vX4XLO6VR3"
         );
 
+
         this.statement=connection.createStatement();
+
         ResultSet set=statement.executeQuery("SELECT value FROM settings WHERE id_setting=1");
         set.first();
         this.serverHTTP=set.getString("value");

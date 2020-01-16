@@ -151,6 +151,7 @@ public class MainActivity extends AppCompatActivity{
                         String s=dbClass.getBeaconURL(b.getEddystoneURL());
                         dbClass.close();
                         uploadUrl(s);
+                        Log.e("## UPDATE URL-> ", s);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
