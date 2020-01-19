@@ -1,0 +1,6 @@
+db server: remotemysql.com
+port: 3306
+phpmyadmin: http://remotemysql.com/phpmyadmin/
+database: Fn3FS6KEOn
+username: Fn3FS6KEOn
+password: vX4XLO6VR3
