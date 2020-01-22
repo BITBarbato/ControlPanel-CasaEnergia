@@ -94,8 +94,14 @@ public class MainActivity extends AppCompatActivity{
         SensoroManager sensoroManager = SensoroManager.getInstance(getApplicationContext());
 
 
-        sensoroManager.setBackgroundBetweenScanPeriod(6000);
-        sensoroManager.setForegroundBetweenScanPeriod(6000);
+        // set the foreground duration of the scan to be 1.1 seconds
+        sensoroManager.setForegroundScanPeriod(5000);
+// set the foreground time between each scan to be 0
+        sensoroManager.setForegroundBetweenScanPeriod(0);
+// set the background duration of the scan to be 5 seconds
+        sensoroManager.setBackgroundScanPeriod(5000);
+// set the background time between each scan to be 30 seconds
+        sensoroManager.setBackgroundBetweenScanPeriod(0);
 
         /**
          * Si verifica se il bluetooth è acceso, altrimenti viene richiesto di accenderlo
