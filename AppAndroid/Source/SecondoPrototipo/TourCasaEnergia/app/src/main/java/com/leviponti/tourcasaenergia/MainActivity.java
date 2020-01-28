@@ -94,12 +94,12 @@ public class MainActivity extends AppCompatActivity{
         SensoroManager sensoroManager = SensoroManager.getInstance(getApplicationContext());
 
 
-        // set the foreground duration of the scan to be 1.1 seconds
-        sensoroManager.setForegroundScanPeriod(5000);
+        // set the foreground duration of the scan to be 6 seconds
+        sensoroManager.setForegroundScanPeriod(6000);
 // set the foreground time between each scan to be 0
         sensoroManager.setForegroundBetweenScanPeriod(0);
-// set the background duration of the scan to be 5 seconds
-        sensoroManager.setBackgroundScanPeriod(5000);
+// set the background duration of the scan to be 6 seconds
+        sensoroManager.setBackgroundScanPeriod(6000);
 // set the background time between each scan to be 30 seconds
         sensoroManager.setBackgroundBetweenScanPeriod(0);
 
@@ -124,6 +124,7 @@ public class MainActivity extends AppCompatActivity{
             public void onNewBeacon(Beacon beacon) {
 
                 Log.e("NEW BEACON FOUND!->",beacon.getEddystoneUID()+" url: "+beacon.getEddystoneURL()+" power transmit: "+beacon.getTransmitPower());
+
 
             }
 
